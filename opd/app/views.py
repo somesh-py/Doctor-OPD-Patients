@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Issue_Category,DoctorRegistration,PatientRegistration
+from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
@@ -26,4 +27,9 @@ def patientdata(request):
         select_doctor=request.POST.get('select_doctor')
         appointment_time=request.POST.get('appointment_time')
         PatientRegistration.objects.create(name=name,contact=contact,email=email,gender=gender,address=address,issue=issue,select_doctor=select_doctor,appointment_time=appointment_time)
-        return redirect('/table/')
+    return redirect('/table/')
+
+def patientsall(request,name):
+    patients=PatientRegistration.objects.filter(select_doctor=name)
+    doctor=DoctorRegistration.objects.get(name=name)
+    return render(request,'doctor.html',{'patients':patients,'doctor':doctor})

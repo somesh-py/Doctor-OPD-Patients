@@ -13,10 +13,27 @@
   <script src="{% static 'js/index.js'%}"></script>
 </head>
 <style>
-
+html
+{
+	scroll-behavior: smooth;
+}
 </style>
     
 <body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+		  <div class="navbar-header">
+			<a class="navbar-brand" href="#" style="position:relative;margin-right:500px;font-size:25px;">Sharma Hospital</a>
+		  </div>
+		  <button type="button" class="btn btn-default" style="margin-left:50px;margin-top:10px;"><a href="/table/">Home</a></button>
+		  <button type="button" class="btn btn-default" style="margin-left:50px;margin-top:10px;"><a href="#customers">Doctors</a></button>
+		  <button type="button" class="btn btn-default" style="margin-left:50px;margin-top:10px;"><a href="#customers">Patients</a></button>
+		  <button type="button" class="btn btn-default" style="margin-left:50px;margin-top:10px;"><a href="/registration/">Registration</a></button>
+		</div>
+	  </nav>
+
+
 
 <div class="container">
   <h2>Patients from 85+ countries have trusted us.</h2>
@@ -109,7 +126,7 @@
   <div style="width:1000px;margin-left:280px;margin-top:-650px;">
     <h1>Our Patients..</h1>
 
-<table id="customers">
+<table id="customers" class="patientsscroll">
   <tr>
     <th>Name</th>
     <th>Contact</th>
@@ -151,6 +168,7 @@
     <th>available</th>
     <th>appointment</th>
     <th>address</th>
+    <th>See all patients</th>
   </tr>
   {% if doctor %}
   {% for i in doctor %}  
@@ -162,6 +180,7 @@
     <td>{{i.available}}</td>
     <td>{{i.appointment}}</td>
     <td>{{i.address}}</td>
+    <td><button type="button" class="btn btn-success"><a href="{% url 'patients' i.name %}" style="color:white;">See Details</a></button></td>
   </tr>
   {% endfor %}
   {% endif %}
